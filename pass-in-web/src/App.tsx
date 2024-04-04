@@ -1,3 +1,11 @@
+import { Header } from './components/header';
+import { AttendeeList } from './components/attendeeList';
+
 export function App() {
-  return <h1>Hello World</h1>;
+  return (
+    <div>
+      <Header />
+      <AttendeeList />
+    </div>
+  );
 }
