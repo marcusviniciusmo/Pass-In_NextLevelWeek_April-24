@@ -1,6 +1,7 @@
 import { IconButton } from './iconButton';
 import { Table } from './table/table';
 import { TableHeader } from './table/tableHeader';
+import { TableRow } from './table/tableRow';
 import { TableCell } from './table/tableCell';
 import {
   Search,
@@ -46,7 +47,7 @@ export function AttendeeList() {
         <tbody>
           {Array.from({ length: 8 }).map((_, i) => {
             return (
-              <tr key={i} className="border-b border-white/10">
+              <TableRow key={i}>
                 <TableCell>
                   <input
                     type="checkbox"
@@ -69,7 +70,7 @@ export function AttendeeList() {
                     <MoreHorizontal className="size-4" />
                   </IconButton>
                 </TableCell>
-              </tr>
+              </TableRow>
             );
           })}
         </tbody>
