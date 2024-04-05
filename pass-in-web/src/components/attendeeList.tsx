@@ -4,6 +4,8 @@ import { TableHeader } from './table/tableHeader';
 import { TableRow } from './table/tableRow';
 import { TableCell } from './table/tableCell';
 import { attendees } from '../data/attendees';
+import { formatDistanceToNow } from 'date-fns';
+import { ptBR } from 'date-fns/locale/pt-BR';
 import {
   Search,
   MoreHorizontal,
@@ -64,8 +66,18 @@ export function AttendeeList() {
                     <span>{attendee.email}</span>
                   </div>
                 </TableCell>
-                <TableCell>{attendee.createdAt.toISOString()}</TableCell>
-                <TableCell>{attendee.checkedInAt.toISOString()}</TableCell>
+                <TableCell>
+                  {formatDistanceToNow(attendee.createdAt, {
+                    locale: ptBR,
+                    addSuffix: true,
+                  })}
+                </TableCell>
+                <TableCell>
+                  {formatDistanceToNow(attendee.checkedInAt, {
+                    locale: ptBR,
+                    addSuffix: true,
+                  })}
+                </TableCell>
                 <TableCell>
                   <IconButton transparent>
                     <MoreHorizontal className="size-4" />
