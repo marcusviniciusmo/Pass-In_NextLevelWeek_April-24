@@ -1,6 +1,7 @@
 import { IconButton } from './iconButton';
 import { Table } from './table/table';
 import { TableHeader } from './table/tableHeader';
+import { TableCell } from './table/tableCell';
 import {
   Search,
   MoreHorizontal,
@@ -46,32 +47,28 @@ export function AttendeeList() {
           {Array.from({ length: 8 }).map((_, i) => {
             return (
               <tr key={i} className="border-b border-white/10">
-                <td className="py-3 px-4 text-sm text-zinc-300">
+                <TableCell>
                   <input
                     type="checkbox"
                     className="size-4 bg-black/20 rounded border border-white/10"
                   />
-                </td>
-                <td className="py-3 px-4 text-sm text-zinc-300">52716</td>
-                <td className="py-3 px-4 text-sm text-zinc-300">
+                </TableCell>
+                <TableCell>52716</TableCell>
+                <TableCell>
                   <div className="flex flex-col gap-1">
                     <span className="font-semibold text-white">
                       Diego Schell Fernandes
                     </span>
                     <span>diego@rocketseat.com.br</span>
                   </div>
-                </td>
-                <td className="py-3 px-4 text-sm text-zinc-300">
-                  7 dias atrás
-                </td>
-                <td className="py-3 px-4 text-sm text-zinc-300">
-                  3 dias atrás
-                </td>
-                <td className="py-3 px-4 text-sm text-zinc-300">
+                </TableCell>
+                <TableCell>7 dias atrás</TableCell>
+                <TableCell>3 dias atrás</TableCell>
+                <TableCell>
                   <IconButton transparent>
                     <MoreHorizontal className="size-4" />
                   </IconButton>
-                </td>
+                </TableCell>
               </tr>
             );
           })}
