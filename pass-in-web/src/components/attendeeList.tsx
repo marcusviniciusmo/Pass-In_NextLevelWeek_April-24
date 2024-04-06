@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IconButton } from './iconButton';
 import { Table } from './table/table';
 import { TableHeader } from './table/tableHeader';
 import { TableRow } from './table/tableRow';
 import { TableCell } from './table/tableCell';
-import { attendees } from '../data/attendees';
+import { attendeesFakerList } from '../data/attendees';
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale/pt-BR';
 import {
@@ -18,9 +18,23 @@ import {
 
 export function AttendeeList() {
   const [page, setPage] = useState(1);
+  const [attendees, setAttendees] = useState(attendeesFakerList);
 
   const attendeePerPage = 10;
   const totalPages = Math.ceil(attendees.length / attendeePerPage);
+  const eventId = '9e9bd979-9d10-4915-b339-3786b1634f33';
+
+  useEffect(() => {
+    fetch(`http://localhost:3333/events/${eventId}/attendees`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data) {
+          setAttendees(data.attendees);
+        } else {
+          setAttendees(attendeesFakerList);
+        }
+      });
+  }, [page]);
 
   function goToFirstPage() {
     setPage(1);
@@ -91,16 +105,20 @@ export function AttendeeList() {
                     </div>
                   </TableCell>
                   <TableCell>
-                    {formatDistanceToNow(attendee.createdAt, {
-                      locale: ptBR,
-                      addSuffix: true,
-                    })}
+                    {attendees.createdAt
+                      ? formatDistanceToNow(attendee.createdAt, {
+                          locale: ptBR,
+                          addSuffix: true,
+                        })
+                      : 'Data de criação não disponível'}
                   </TableCell>
                   <TableCell>
-                    {formatDistanceToNow(attendee.checkedInAt, {
-                      locale: ptBR,
-                      addSuffix: true,
-                    })}
+                    {attendee.checkedInAt
+                      ? formatDistanceToNow(attendee.checkedInAt, {
+                          locale: ptBR,
+                          addSuffix: true,
+                        })
+                      : 'Data de check-in não disponível'}
                   </TableCell>
                   <TableCell>
                     <IconButton transparent>
